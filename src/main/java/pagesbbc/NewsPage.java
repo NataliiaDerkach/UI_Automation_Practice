@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewsPage extends BasePage {
@@ -32,12 +31,8 @@ public class NewsPage extends BasePage {
         return headLineArticleNews.getText();
     }
 
-    public List<String> getTextOfSecondaryArticleTitles() {
-        List<String> secondaryArticle = new ArrayList<>();
-        for (WebElement el : secondaryArticleTitles) {
-            secondaryArticle.add(el.getText());
-        }
-        return secondaryArticle;
+    public List<WebElement> getSecondaryArticleTitles() {
+        return secondaryArticleTitles;
     }
 
     public WebElement getSearchField() {
@@ -48,7 +43,7 @@ public class NewsPage extends BasePage {
         return coronavirusButton;
     }
 
-    public WebElement getTextOfCategoryLinkOfTheHeadlineArticle(){
-      return   textOfCategoryLinkOfTheHeadlineArticle;
+    public String getTextOfCategoryLinkOfTheHeadlineArticle() {
+        return textOfCategoryLinkOfTheHeadlineArticle.getText();
     }
 }

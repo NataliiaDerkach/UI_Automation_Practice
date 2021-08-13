@@ -2,25 +2,22 @@ Feature: Tests BBC
   As a user I want to check some functionality
 
   Scenario Outline: Checks the name of the head line article
-    Given User opens '<homePage>' page
-    When User opens news page
-    And User checks the name '<titleHeadLine>' of the article
-
+    Given User opens news page '<homePage>'
+    Then User checks the '<titleHeadLine>' name of the article
 
     Examples:
-      | homePage            | titleHeadLine                                     |
-      | https://www.bbc.com | Belarus athlete told by grandmother not to return |
+      | homePage            | titleHeadLine                               |
+      | https://www.bbc.com | Diplomats hasten exit as Taliban near Kabul |
 
 
   Scenario Outline: Checks the name of secondary article titles
-    Given User opens '<homePage>' page
-    When User opens news page
+    Given User opens news page '<homePage>'
     Then User checks the name of secondary article titles:
-      | Chronic illness influencers accused of faking it   |
-      | Ethiopian rebels take Unesco world heritage town   |
-      | Turkish influencer prosecuted 'for sex-toy photos' |
-      | What is Fox host Tucker Carlson doing in Hungary?  |
-      | Lionel Messi will not stay at Barcelona            |
+      | Fearing the Taliban, Kabul's young women plead for help |
+      | UK gunman's mother among five victims named             |
+      | BBC condemns expulsion of journalist from Russia        |
+      | ‘World silently watches this war against women’         |
+      | July was Earth's hottest month ever - US agency         |
 
     Examples:
       | homePage            |
@@ -28,8 +25,7 @@ Feature: Tests BBC
 
 
   Scenario Outline: Check search by keyword of category link
-    Given User opens '<homePage>' page
-    When User opens news page
+    Given User opens news page '<homePage>'
     And User submitted to the search field the category link from the first article
     Then User checks that the header of the first article contains searched keyword
 
@@ -39,11 +35,7 @@ Feature: Tests BBC
 
 
   Scenario Outline: Verifies that user can submit story with empty name field
-    Given User opens '<homePage>' page
-    When User opens news page
-    And User opens coronavirus page
-    And User opens your coronavirus stories page
-    And User choose link of how to share with BBC
+    Given User opens page contains form'<homePage>'
     And User fills out the form field:
       | story    | Healthy GRATE |
       | Contact  | 05362977888   |
@@ -57,11 +49,7 @@ Feature: Tests BBC
 
 
   Scenario Outline: Verifies that user can submit story without choose checkbox
-    Given User opens '<homePage>' page
-    When User opens news page
-    And User opens coronavirus page
-    And User opens your coronavirus stories page
-    And User choose link of how to share with BBC
+    Given User opens page contains form'<homePage>'
     And User fills out the form field:
       | story    | Healthy GRATE |
       | Name     | Olga          |
@@ -75,11 +63,7 @@ Feature: Tests BBC
 
 
   Scenario Outline: Verifies that user can submit story with not valid email address
-    Given User opens '<homePage>' page
-    When User opens news page
-    And User opens coronavirus page
-    And User opens your coronavirus stories page
-    And User choose link of how to share with BBC
+    Given User opens page contains form'<homePage>'
     And User fills out the form field:
       | story    | Healthy GRATE            |
       | Name     | Olga                     |

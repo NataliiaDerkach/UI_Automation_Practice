@@ -11,7 +11,6 @@ public class RadioButton {
 
     WebDriver driver;
 
-   // @FindBy(xpath = "//tr//td//input")
     private List<WebElement> radioButton;
 
     public RadioButton(WebDriver driver, List<WebElement> radioButton) {

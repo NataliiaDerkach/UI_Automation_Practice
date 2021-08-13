@@ -1,15 +1,20 @@
 package businessLogik;
 
-import manager.PageFactoryManagerBBC;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import pagesbbc.*;
 
 import java.util.List;
 import java.util.Map;
 
-public class BusinessLogicBBC extends PageFactoryManagerBBC {
+public class BusinessLogicBBC extends BLL {
 
     private static final long TIME_TO_WAIT = 30;
+    private final CoronavirusPage coronavirusPage = new CoronavirusPage(getDriver());
+    private final HomePage homePage = new HomePage(getDriver());
+    private final NewsPage newsPage = new NewsPage(getDriver());
+    private final SearchKeywordResultPage searchKeywordResultPage = new SearchKeywordResultPage(getDriver());
+    private final SendUsAStoryPage sendUsAStoryPage = new SendUsAStoryPage(getDriver());
+    private final YourCoronavirusStoriesPage yourCoronavirusStoriesPage = new YourCoronavirusStoriesPage(getDriver());
 
 
     public BusinessLogicBBC(WebDriver driver) {
@@ -17,62 +22,49 @@ public class BusinessLogicBBC extends PageFactoryManagerBBC {
     }
 
 
-    public void clickOnHowToShareWithBBC() {
-        getYourCoronavirusStoriesPage().getHowToShareWithBBCButton().click();
-        getSendUsAStoryPage().waitForPageLoadComplete(TIME_TO_WAIT);
+    public void openNewsPage(String url) {
+        openWelcomePage(url);
+        homePage.clickOnNewsButton();
     }
 
-    public String getTextOfCategoryLink() {
-        return getNewsPage().getTextOfCategoryLinkOfTheHeadlineArticle().getText();
+    public String headLineArticleNews() {
+        newsPage.waitForPageLoadComplete(TIME_TO_WAIT);
+        return newsPage.getTextOfHeadLineArticleNews();
     }
 
-    public String getTextOfFirstElementOnPage(){
-        return getSearchKeywordResultPage().getFirstElementOnPage().getText();
+    public List<String> listSecondaryArticleTitles() {
+        newsPage.waitForPageLoadComplete(TIME_TO_WAIT);
+        return textFromListOfElements(newsPage.getSecondaryArticleTitles());
     }
 
-    public List<String> getTextOfElementFromList() {
-        getNewsPage().waitForPageLoadComplete(TIME_TO_WAIT);
-        return getNewsPage().getTextOfSecondaryArticleTitles();
+    public String getTextOfCategoryLink() {              //added
+        return newsPage.getTextOfCategoryLinkOfTheHeadlineArticle();
     }
 
-    public void enterSearchKeyword(final String keyword) {
-        getNewsPage().getSearchField().sendKeys(keyword, Keys.ENTER);
-        getSearchKeywordResultPage().waitForPageLoadComplete(TIME_TO_WAIT);
-    }
-
-    public void openHomePage(String url) {
-        getDriver().get(url);
-    }
-
-    public void goToNewsPage() {
-        getHomePage().clickOnNewsButton();
-    }
-
-    public void goToCoronaVirusPage() {
-        getNewsPage().getCoronavirusButton().click();
-        getCoronavirusPage().waitForPageLoadComplete(TIME_TO_WAIT);
-    }
-
-    public void goToYourCoronavirusStoriesPage() {
-        getCoronavirusPage().getYourCoronavirusStoriesButton().click();
-        getYourCoronavirusStoriesPage().waitForPageLoadComplete(TIME_TO_WAIT);
+    public void enterSearchKeywordCopyLink(String keyword) {
+        enterKeyword(keyword, newsPage.getSearchField());
+        searchKeywordResultPage.waitForPageLoadComplete(TIME_TO_WAIT);
     }
 
 
-    public String textHeadLineArticleNews() {
-        getNewsPage().waitForPageLoadComplete(TIME_TO_WAIT);
-        return getNewsPage().getTextOfHeadLineArticleNews();
+    public String getTextFirstElementOnPage() {
+        return textOfFirstElement(searchKeywordResultPage.getFirstElementOnPage());
     }
 
-    public void testSendStoryToBBC(Map<String, String> map) {
-        getSendUsAStoryPage().fillFormFields(map);
-        getSendUsAStoryPage().getSubmitButton().click();
+    public void openSendStoryPage(String url) {
+        openNewsPage(url);
+        clickOnElement(newsPage.getCoronavirusButton());
+        clickOnElement(coronavirusPage.getYourCoronavirusStoriesButton());
+        clickOnElement(yourCoronavirusStoriesPage.getHowToShareWithBBCButton());
+        sendUsAStoryPage.waitForPageLoadComplete(TIME_TO_WAIT);
+    }
+
+    public void sendStoryToBBC(Map<String, String> map) {
+        sendUsAStoryPage.fillFormFields(map);
+        sendUsAStoryPage.getSubmitButton().click();
     }
 
     public String errorMessageOfForm() {
-        return getSendUsAStoryPage().getErrorMessage().getText();
+        return sendUsAStoryPage.getErrorMessage().getText();
     }
-
-
-
 }

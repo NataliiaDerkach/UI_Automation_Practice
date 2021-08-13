@@ -1,67 +1,91 @@
 package businessLogik;
 
-import manager.PageFactoryManagerLorem;
 import org.openqa.selenium.WebDriver;
+import pagesloremipsum.GenerateLoremIpsumPage;
+import pagesloremipsum.HomePageLorem;
 
-public class BusinessLogicLorem extends PageFactoryManagerLorem {
+import java.util.List;
 
-    private static final String UNCHECK_START_WITH_LOREM_IPSUM = "start";
+public class BusinessLogicLorem extends BLL {
+
+    private static final String URL_LOREM_IPSUM = "https://lipsum.com/";
+    private final HomePageLorem homePageLorem = new HomePageLorem(getDriver());
+    private final GenerateLoremIpsumPage generateLoremIpsumPage = new GenerateLoremIpsumPage(getDriver());
 
     public BusinessLogicLorem(WebDriver driver) {
         super(driver);
     }
 
+
+   /* public double amountOfKeywordLoremInTextGenerated() {
+        double count = 0;
+        for (int i = 0; i < 10; i++) {
+            count += generateLoremIpsumPage.getParagraphGenerated().stream()
+                    .filter(p -> p.getText().contains("lorem") || p.getText().contains("Lorem")).count();
+            rerunTheGeneration();
+        }
+        double result = count / 10;
+        return result;
+    }*/
+
+
+    public void choseLanguage() {
+        openWelcomePage(URL_LOREM_IPSUM);
+        homePageLorem.getLinkRussianLanguage().click();
+    }
+
     public String textFirstParagraph() {
-        return getHomePageLorem().getFirstParagraph().getText();
+        return textOfFirstElement(homePageLorem.getFirstParagraph());
     }
 
-    public void switchedRussianLanguage() {
-        getHomePageLorem().getLinkRussianLanguage().click();
+    public void generateLoremIpsum() {
+        openWelcomePage(URL_LOREM_IPSUM);
+        clickOnElement(homePageLorem.getGenerateLoremIpsum());
     }
 
-    public void pressGenerateLoremIpsum() {
-        getHomePageLorem().getGenerateLoremIpsum().click();
+    public String firstGeneratedParagraph() {
+        return textOfFirstElement(generateLoremIpsumPage.getFirstParagraph());
     }
 
-    public String textFirstParagraphOfGenerated() {
-        return getGenerateLoremIpsumPage().getFirstParagraph().getText();
+    public void generate(String keyword, String button) {
+        openWelcomePage(URL_LOREM_IPSUM);
+        homePageLorem.chooseRadioButton(button);
+        homePageLorem.enterAmountInField(keyword);
     }
 
-    public void optionsOfGenerate(String keyword, String button) {
-        getHomePageLorem().chooseRadioButton(button);
-        getHomePageLorem().enterAmountInField(keyword);
+    public void generate(String button) {
+        openWelcomePage(URL_LOREM_IPSUM);
+        homePageLorem.chooseRadioButton(button);
+        clickOnElement(homePageLorem.getGenerateLoremIpsum());
     }
 
     public String amountWordsInGeneratedText() {
-        String words = textFirstParagraphOfGenerated();
+        String words = textOfFirstElement(generateLoremIpsumPage.getFirstParagraph());
         String[] wordsSplit = words.split("\\W+");
         return String.valueOf(wordsSplit.length);
     }
 
     public String amountCharsInGeneratedText() {
-        String words = textFirstParagraphOfGenerated();
+        String words = textOfFirstElement(generateLoremIpsumPage.getFirstParagraph());
         char[] chars = words.toCharArray();
         return String.valueOf(chars.length);
     }
 
-    public void getUncheckStartWithLoremIpsum() {
-        getHomePageLorem().chooseRadioButton(UNCHECK_START_WITH_LOREM_IPSUM);
-    }
-
     public void rerunTheGeneration() {
-        getGenerateLoremIpsumPage().clickComebackOnHomePage();
-        getHomePageLorem().getGenerateLoremIpsum().click();
+        generateLoremIpsumPage.clickComebackOnHomePage();
+        homePageLorem.getGenerateLoremIpsum().click();
     }
 
-    public double amountOfKeywordLoremInTextGenerated() {
-        double count=0;
+    public double countWordsLoremInText() {
+        double count = 0;
         for (int i = 0; i < 10; i++) {
-            count += getGenerateLoremIpsumPage().getParagraphGenerated().stream()
-                    .filter(p -> p.getText().contains("lorem")||p.getText().contains("Lorem")).count();
+            List<String> elements = textFromListOfElements(generateLoremIpsumPage.getParagraphGenerated());
+            count += elements.stream()
+                    .filter(p -> p.contains("lorem"))
+                    .count();
             rerunTheGeneration();
         }
-        double result = count/10;
-        return result;
+        return count / 10;
     }
 
 }
