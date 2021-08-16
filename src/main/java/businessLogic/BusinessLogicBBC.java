@@ -1,4 +1,4 @@
-package businessLogik;
+package businessLogic;
 
 import org.openqa.selenium.WebDriver;
 import pagesbbc.*;
@@ -14,7 +14,7 @@ public class BusinessLogicBBC extends BLL {
     private final NewsPage newsPage = new NewsPage(getDriver());
     private final SearchKeywordResultPage searchKeywordResultPage = new SearchKeywordResultPage(getDriver());
     private final SendUsAStoryPage sendUsAStoryPage = new SendUsAStoryPage(getDriver());
-    private final YourCoronavirusStoriesPage yourCoronavirusStoriesPage = new YourCoronavirusStoriesPage(getDriver());
+    private final YourCoronaStoriesPage yourCoronaStoriesPage = new YourCoronaStoriesPage(getDriver());
 
 
     public BusinessLogicBBC(WebDriver driver) {
@@ -38,7 +38,7 @@ public class BusinessLogicBBC extends BLL {
     }
 
     public String getTextOfCategoryLink() {              //added
-        return newsPage.getTextOfCategoryLinkOfTheHeadlineArticle();
+        return newsPage.getTextOfCategoryLinkOfHeadlineArticle();
     }
 
     public void enterSearchKeywordCopyLink(String keyword) {
@@ -53,9 +53,9 @@ public class BusinessLogicBBC extends BLL {
 
     public void openSendStoryPage(String url) {
         openNewsPage(url);
-        clickOnElement(newsPage.getCoronavirusButton());
-        clickOnElement(coronavirusPage.getYourCoronavirusStoriesButton());
-        clickOnElement(yourCoronavirusStoriesPage.getHowToShareWithBBCButton());
+        newsPage.goToCoronavirusPage();
+        coronavirusPage.goToYourCoronaStoriesPage();
+        yourCoronaStoriesPage.goToShareWithBBCPage();
         sendUsAStoryPage.waitForPageLoadComplete(TIME_TO_WAIT);
     }
 

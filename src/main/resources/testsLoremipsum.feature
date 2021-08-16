@@ -20,83 +20,28 @@ Feature: Tests Lorem ipsum
 
 
   Scenario Outline: User verifies that Lorem Ipsum is generated with correct size:
-    Given User generates '<amount1>' of words'<button>' on the home page
-    Then User verifies amount words is generated with correct size'<amount1>','<button>'
+    Given User generates '<amount>' of words'<button>' on the home page
+    Then User verifies amount words is generated with correct size'<amount>','<button>'
 
     Examples:
-      | amount1 | button |
-      | 10      | words  |
-
-
-  Scenario Outline: User verifies that Lorem Ipsum is generated with correct size:
-    Given User generates '<amount2>' of words'<button>' on the home page
-    Then User verifies amount words is generated with correct size'<amount2>','<button>'
-
-    Examples:
-      | amount2 | button |
-      | 5       | words  |
-
-
-  Scenario Outline: User verifies that Lorem Ipsum is generated with correct size:
-    Given User generates '<amount3>' of words'<button>' on the home page
-    Then User verifies amount words is generated with correct size'<amount3>','<button>'
-
-    Examples:
-      | amount3 | button |
-      | 20      | words  |
-
-
-  Scenario Outline: User verifies that Lorem Ipsum is generated with correct size:
-    Given User generates '<amountChars1>' of words'<button>' on the home page
-    Then User verifies amount words is generated with correct size'<amountChars1>','<button>'
-
-    Examples:
-      | amountChars1 | button |
-      | 3            | bytes  |
-
-
-  Scenario Outline: User verifies that Lorem Ipsum is generated with correct size:
-    Given User generates '<amountChars2>' of words'<button>' on the home page
-    Then User verifies amount words is generated with correct size'<amountChars2>','<button>'
-
-    Examples:
-      | amountChars2 | button |
-      | 32           | bytes  |
+      | amount | button |
+      | 10     | words  |
+      | 5      | words  |
+      | 20     | words  |
+      | 3      | bytes  |
+      | 32     | bytes  |
 
 
   Scenario Outline: User verifies that Lorem Ipsum is generated is not correct size:
-    Given User generates '<amount1>' of words'<button>' on the home page
-    Then User verifies amount words is generated is not correct size'<amount1>','<button>'
+    Given User generates '<amount>' of words'<button>' on the home page
+    Then User verifies amount words is generated is not correct size'<amount>','<button>'
 
     Examples:
-       | amount1 | button |
-     | -1      | words  |
-
-  Scenario Outline: User verifies that Lorem Ipsum is generated is not correct size:
-    Given User generates '<amount2>' of words'<button>' on the home page
-    Then User verifies amount words is generated is not correct size'<amount2>','<button>'
-
-    Examples:
-      | amount2 | button |
-      | 0       | words  |
-
-
-  Scenario Outline: User verifies that Lorem Ipsum is generated is not correct size:
-    Given User generates '<amount3>' of words'<button>' on the home page
-    Then User verifies amount words is generated is not correct size'<amount3>','<button>'
-
-    Examples:
-      | amount3 | button |
-      | 2       | bytes  |
-
-
-  Scenario Outline: User verifies that Lorem Ipsum is generated is not correct size:
-    Given User generates '<amount4>' of words'<button>' on the home page
-    Then User verifies amount words is generated is not correct size'<amount4>','<button>'
-
-    Examples:
-      | amount4 | button |
-      | 1       | bytes  |
+      | amount | button |
+      | -1     | words  |
+      | 0      | words  |
+      | 2      | bytes  |
+      | 1      | bytes  |
 
 
   Scenario Outline: User verifies the checkbox:
@@ -105,7 +50,7 @@ Feature: Tests Lorem ipsum
 
     Examples:
       | radioButton | keyword     |
-      | start    | Lorem Ipsum |
+      | start       | Lorem Ipsum |
 
 
   Scenario Outline:User checks that randomly generated text paragraphs contain the word "lorem" with probability of more than 40%:

@@ -4,16 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class YourCoronavirusStoriesPage extends BasePage{
+public class YourCoronaStoriesPage extends BasePage {
 
     @FindBy(xpath = "//a[@href='/news/10725415']")
     private WebElement howToShareWithBBCButton;
 
-    public YourCoronavirusStoriesPage(WebDriver driver) {
+    public YourCoronaStoriesPage(WebDriver driver) {
         super(driver);
     }
 
-    public WebElement getHowToShareWithBBCButton() {
-        return howToShareWithBBCButton;
+    public void goToShareWithBBCPage() {
+        howToShareWithBBCButton.click();
     }
 }

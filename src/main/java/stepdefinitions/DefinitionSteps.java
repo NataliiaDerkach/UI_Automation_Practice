@@ -1,7 +1,7 @@
 package stepdefinitions;
 
-import businessLogik.BusinessLogicBBC;
-import businessLogik.BusinessLogicLorem;
+import businessLogic.BusinessLogicBBC;
+import businessLogic.BusinessLogicLorem;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -39,9 +39,6 @@ public class DefinitionSteps{
     public void tearDown() {
         driver.close();
     }
-
-// variant 2
-
 
     @Given("User opens news page {string}")
     public void userOpensNewsPageHomePage(final String url) {

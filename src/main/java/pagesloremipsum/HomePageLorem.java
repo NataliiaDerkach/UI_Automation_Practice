@@ -36,8 +36,8 @@ public class HomePageLorem extends BasePageLorem {
         return russianLanguageLink;
     }
 
-    public WebElement getGenerateLoremIpsum() {
-        return generateLoremIpsum;
+    public void clickOnGenerateLoremIpsum() {
+         generateLoremIpsum.click();
     }
 
     public void enterAmountInField(final String keyword) {

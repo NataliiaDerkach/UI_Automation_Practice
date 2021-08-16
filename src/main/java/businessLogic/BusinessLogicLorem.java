@@ -1,4 +1,4 @@
-package businessLogik;
+package businessLogic;
 
 import org.openqa.selenium.WebDriver;
 import pagesloremipsum.GenerateLoremIpsumPage;
@@ -17,18 +17,6 @@ public class BusinessLogicLorem extends BLL {
     }
 
 
-   /* public double amountOfKeywordLoremInTextGenerated() {
-        double count = 0;
-        for (int i = 0; i < 10; i++) {
-            count += generateLoremIpsumPage.getParagraphGenerated().stream()
-                    .filter(p -> p.getText().contains("lorem") || p.getText().contains("Lorem")).count();
-            rerunTheGeneration();
-        }
-        double result = count / 10;
-        return result;
-    }*/
-
-
     public void choseLanguage() {
         openWelcomePage(URL_LOREM_IPSUM);
         homePageLorem.getLinkRussianLanguage().click();
@@ -40,7 +28,7 @@ public class BusinessLogicLorem extends BLL {
 
     public void generateLoremIpsum() {
         openWelcomePage(URL_LOREM_IPSUM);
-        clickOnElement(homePageLorem.getGenerateLoremIpsum());
+        homePageLorem.clickOnGenerateLoremIpsum();
     }
 
     public String firstGeneratedParagraph() {
@@ -56,7 +44,7 @@ public class BusinessLogicLorem extends BLL {
     public void generate(String button) {
         openWelcomePage(URL_LOREM_IPSUM);
         homePageLorem.chooseRadioButton(button);
-        clickOnElement(homePageLorem.getGenerateLoremIpsum());
+        homePageLorem.clickOnGenerateLoremIpsum();
     }
 
     public String amountWordsInGeneratedText() {
@@ -73,7 +61,7 @@ public class BusinessLogicLorem extends BLL {
 
     public void rerunTheGeneration() {
         generateLoremIpsumPage.clickComebackOnHomePage();
-        homePageLorem.getGenerateLoremIpsum().click();
+        homePageLorem.clickOnGenerateLoremIpsum();
     }
 
     public double countWordsLoremInText() {

@@ -1,4 +1,4 @@
-package businessLogik;
+package businessLogic;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -35,9 +35,6 @@ public class BLL {
         return element.getText();
     }
 
-    public void clickOnElement(WebElement element) {
-        element.click();
-    }
 
     public List<String> textFromListOfElements(List<WebElement>list) {
         List<String> elements = new ArrayList<>();

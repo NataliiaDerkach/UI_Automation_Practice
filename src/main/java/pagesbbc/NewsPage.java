@@ -39,11 +39,11 @@ public class NewsPage extends BasePage {
         return searchField;
     }
 
-    public WebElement getCoronavirusButton() {
-        return coronavirusButton;
+    public void goToCoronavirusPage() {
+         coronavirusButton.click();
     }
 
-    public String getTextOfCategoryLinkOfTheHeadlineArticle() {
+    public String getTextOfCategoryLinkOfHeadlineArticle() {
         return textOfCategoryLinkOfTheHeadlineArticle.getText();
     }
 }

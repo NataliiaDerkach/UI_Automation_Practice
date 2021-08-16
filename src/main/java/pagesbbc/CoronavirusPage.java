@@ -13,7 +13,7 @@ public class CoronavirusPage extends BasePage{
         super(driver);
     }
 
-    public WebElement getYourCoronavirusStoriesButton() {
-        return yourCoronavirusStoriesButton;
+    public void goToYourCoronaStoriesPage() {
+        yourCoronavirusStoriesButton.click();
     }
 }
