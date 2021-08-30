@@ -53,10 +53,10 @@ Feature: Tests Lorem ipsum
       | start       | Lorem Ipsum |
 
 
-  Scenario Outline:User checks that randomly generated text paragraphs contain the word "lorem" with probability of more than 40%:
+
+  Scenario:User checks that randomly generated text paragraphs contain the word "lorem" with probability of more than 40%:
     Given User generate lorem ipsum
     Then User runs the generation ten times and checks the average number of paragraphs containing the word lorem
 
-    Examples:
-      | homePage            |
-      | https://lipsum.com/ |
+
+

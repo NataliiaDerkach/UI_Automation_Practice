@@ -6,24 +6,32 @@ import pagesbbc.*;
 import java.util.List;
 import java.util.Map;
 
-public class BusinessLogicBBC extends BLL {
+public class BusinessLogicBBC {
 
+    private WebDriver driver;
+    private static final String URL_BBC = "https://www.bbc.com";
     private static final long TIME_TO_WAIT = 30;
-    private final CoronavirusPage coronavirusPage = new CoronavirusPage(getDriver());
-    private final HomePage homePage = new HomePage(getDriver());
-    private final NewsPage newsPage = new NewsPage(getDriver());
-    private final SearchKeywordResultPage searchKeywordResultPage = new SearchKeywordResultPage(getDriver());
-    private final SendUsAStoryPage sendUsAStoryPage = new SendUsAStoryPage(getDriver());
-    private final YourCoronaStoriesPage yourCoronaStoriesPage = new YourCoronaStoriesPage(getDriver());
+    CoronavirusPage coronavirusPage;
+    HomePage homePage;
+    NewsPage newsPage;
+    SearchKeywordResultPage searchKeywordResultPage;
+    SendUsAStoryPage sendUsAStoryPage;
+    YourCoronaStoriesPage yourCoronaStoriesPage;
 
 
     public BusinessLogicBBC(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
+        coronavirusPage = new CoronavirusPage(driver);
+        homePage = new HomePage(driver);
+        newsPage = new NewsPage(driver);
+        searchKeywordResultPage = new SearchKeywordResultPage(driver);
+        sendUsAStoryPage = new SendUsAStoryPage(driver);
+        yourCoronaStoriesPage = new YourCoronaStoriesPage(driver);
     }
 
 
-    public void openNewsPage(String url) {
-        openWelcomePage(url);
+    public void openNewsPage() {
+        HelpManager.openWelcomePage(driver, URL_BBC);
         homePage.clickOnNewsButton();
     }
 
@@ -34,37 +42,40 @@ public class BusinessLogicBBC extends BLL {
 
     public List<String> listSecondaryArticleTitles() {
         newsPage.waitForPageLoadComplete(TIME_TO_WAIT);
-        return textFromListOfElements(newsPage.getSecondaryArticleTitles());
+        return HelpManager.textFromListOfElements(newsPage.getSecondaryArticleTitles());
     }
 
-    public String getTextOfCategoryLink() {              //added
+    public String getTextOfCategoryLink() {
         return newsPage.getTextOfCategoryLinkOfHeadlineArticle();
     }
 
     public void enterSearchKeywordCopyLink(String keyword) {
-        enterKeyword(keyword, newsPage.getSearchField());
+        HelpManager.enterKeyword(keyword, newsPage.getSearchField());
         searchKeywordResultPage.waitForPageLoadComplete(TIME_TO_WAIT);
     }
 
 
     public String getTextFirstElementOnPage() {
-        return textOfFirstElement(searchKeywordResultPage.getFirstElementOnPage());
+        return HelpManager.textOfFirstElement(searchKeywordResultPage.getFirstElementOnPage());
     }
 
-    public void openSendStoryPage(String url) {
-        openNewsPage(url);
+    public void openSendStoryPage() {
+        openNewsPage();
         newsPage.goToCoronavirusPage();
         coronavirusPage.goToYourCoronaStoriesPage();
         yourCoronaStoriesPage.goToShareWithBBCPage();
-        sendUsAStoryPage.waitForPageLoadComplete(TIME_TO_WAIT);
     }
 
     public void sendStoryToBBC(Map<String, String> map) {
         sendUsAStoryPage.fillFormFields(map);
-        sendUsAStoryPage.getSubmitButton().click();
+        sendUsAStoryPage.getSubmitButton();
     }
 
     public String errorMessageOfForm() {
         return sendUsAStoryPage.getErrorMessage().getText();
+    }
+
+    public void waiteText(long timeToWait, String text) {
+        HelpManager.waitTextToBePresent(driver, timeToWait, text);
     }
 }

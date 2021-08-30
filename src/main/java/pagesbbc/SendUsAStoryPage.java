@@ -31,8 +31,8 @@ public class SendUsAStoryPage extends BasePage {
     }
 
 
-    public WebElement getSubmitButton() {
-        return submitButton;
+    public void getSubmitButton() {
+         submitButton.click();
     }
 
     public WebElement getErrorMessage() {

@@ -20,7 +20,7 @@ public class NewsPage extends BasePage {
     @FindBy(xpath = "//li[contains(@class,'gs-o-list-ui__item--flush gel-long-primer')]//a[@href='/news/coronavirus']")
     private WebElement coronavirusButton;
 
-    @FindBy(xpath = "(//div[@data-entityid='container-top-stories#1']//span[@aria-hidden='true'])[2]")
+    @FindBy(xpath = "//div[@data-entityid='container-top-stories#1']//a//span")
     private WebElement textOfCategoryLinkOfTheHeadlineArticle;
 
     public NewsPage(WebDriver driver) {

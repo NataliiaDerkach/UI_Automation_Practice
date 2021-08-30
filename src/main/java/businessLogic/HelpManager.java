@@ -10,43 +10,35 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BLL {
+public class HelpManager {
 
-    private WebDriver driver;
 
-    public BLL(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void openWelcomePage(String url) {
-        getDriver().get(url);
+    public static void openWelcomePage(WebDriver driver, String url) {
+        driver.get(url);
     }
 
 
-    public void enterKeyword(final String keyword, WebElement element) {
+    public static void enterKeyword(final String keyword, WebElement element) {
         element.sendKeys(keyword, Keys.ENTER);
     }
 
-    public String textOfFirstElement(WebElement element) {
+    public static String textOfFirstElement(WebElement element) {
         return element.getText();
     }
 
 
-    public List<String> textFromListOfElements(List<WebElement>list) {
+    public static List<String> textFromListOfElements(List<WebElement> list) {
         List<String> elements = new ArrayList<>();
-       list.forEach(i->{
-           elements.add(i.getText());
-       });
+        list.forEach(i -> {
+            elements.add(i.getText());
+        });
         return elements;
     }
 
-    public void waitTextToBePresent(long timeToWait, String text) {
+    public static void waitTextToBePresent(WebDriver driver, long timeToWait, String text) {
         new WebDriverWait(driver, timeToWait)
                 .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@class='input-error-message']"), text));
     }
+
 
 }
