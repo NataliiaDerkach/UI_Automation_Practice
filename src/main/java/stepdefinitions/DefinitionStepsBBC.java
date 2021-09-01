@@ -10,13 +10,13 @@ import org.junit.Assert;
 import java.util.List;
 import java.util.Map;
 
-public class TestContextBBC {
+public class DefinitionStepsBBC {
 
     private String textOfCopyLink = "";
     private static final long TIME_TO_WAIT = 30;
     private final BusinessLogicBBC logicBBC;
 
-    public TestContextBBC(TestContext context) {
+    public DefinitionStepsBBC(TestContext context) {
         logicBBC = new BusinessLogicBBC(context.getDriver());
     }
 

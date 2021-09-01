@@ -12,6 +12,7 @@ public class BusinessLogicLorem {
     private static final String URL_LOREM_IPSUM = "https://lipsum.com/";
     HomePageLorem homePageLorem;
     GenerateLoremIpsumPage generateLoremIpsumPage;
+    private int x;
 
     public BusinessLogicLorem(WebDriver driver) {
         this.driver = driver;
@@ -66,16 +67,16 @@ public class BusinessLogicLorem {
         homePageLorem.clickOnGenerateLoremIpsum();
     }
 
-    public double countWordsLoremInText() {
+    public double countWordsLoremInText(int x) {
         double count = 0;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < x; i++) {
             List<String> elements = HelpManager.textFromListOfElements(generateLoremIpsumPage.getParagraphGenerated());
             count += elements.stream()
                     .filter(p -> p.contains("lorem"))
                     .count();
             rerunTheGeneration();
         }
-        return count / 10;
+        return count / x;
     }
 
 }
