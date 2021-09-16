@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class SearchKeywordResultPage extends BasePage {
 
-    @FindBy(xpath = "(//li//p/span[@aria-hidden='false'])[2]")
+    @FindBy(xpath = "(//li//div/p)[1]")
     private WebElement firstElementOnPage;
 
     public SearchKeywordResultPage(WebDriver driver) {

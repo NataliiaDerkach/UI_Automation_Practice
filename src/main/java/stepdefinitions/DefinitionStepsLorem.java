@@ -43,7 +43,6 @@ public class DefinitionStepsLorem {
         }
     }
 
-
     @Then("^User verifies that (.*) of (.*) is generated is not correct size$")
     public void userVerifiesThatAmountOfButtonIsGeneratedIsNotCorrectSize(String keyword, String button) {
         if (button.contains("words")) {
@@ -63,10 +62,9 @@ public class DefinitionStepsLorem {
         Assert.assertFalse(logicLorem.firstGeneratedParagraph().contains(keyword));
     }
 
-    @Then("^User  generates (\\d+) times and checks the average number of the word lorem in paragraphs$")
+    @Then("^User generates (\\d+) times and checks that the word lorem in paragraphs equals to range$")
     public void userGeneratesTimesAndChecksTheAverageNumberOfTheWordLoremInParagraphs(int times) {
         double averageNumber = logicLorem.countWordsLoremInText(times);
-        System.out.println("amount lorem" + "-" + averageNumber);
         Assert.assertTrue(averageNumber > 2.0 && averageNumber <= 3.0);
     }
 

@@ -25,7 +25,7 @@ public class DefinitionStepsBBC {
         logicBBC.openNewsPage();
     }
 
-    @Then("User checks the {string} name of the article")
+    @Then("^User checks the (.*) name of the article$")
     public void userChecksTheTitleHeadLineNameOfTheArticle(String keyword) {
         Assert.assertTrue(logicBBC.headLineArticleNews().contains(keyword));
     }
@@ -48,12 +48,7 @@ public class DefinitionStepsBBC {
         Assert.assertTrue(logicBBC.getTextFirstElementOnPage().contains(textOfCopyLink));
     }
 
-    @Given("User opens page contains form")
-    public void userOpensPageContainsForm() {
-        logicBBC.openSendStoryPage();
-    }
-
-    @And("User fills out the form field:")
+    @Given("User fills out the form field:")
     public void userFillsOutTheFormField(DataTable dataTable) {
         Map<String, String> map = dataTable.asMap(String.class, String.class);
         logicBBC.sendStoryToBBC(map);

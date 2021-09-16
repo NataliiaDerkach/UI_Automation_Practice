@@ -48,7 +48,7 @@ Feature: Tests Lorem ipsum
       | 0      |
 
 
-  Scenario Outline: User verifies that bytes for generate couldn't be less two:
+  Scenario Outline: User verifies that bytes for generate couldn't be less three:
     Given User generates <amount> of bytes on the home page
     Then User verifies that <amount> of bytes is generated is not correct size
 
@@ -65,7 +65,7 @@ Feature: Tests Lorem ipsum
 
   Scenario Outline: User checks that randomly generated text paragraphs contain the word "lorem" with probability of more than 40%:
     Given User generate lorem ipsum
-    Then User  generates <times> times and checks the average number of the word lorem in paragraphs
+    Then User generates <times> times and checks that the word lorem in paragraphs equals to range
 
     Examples:
       | times |

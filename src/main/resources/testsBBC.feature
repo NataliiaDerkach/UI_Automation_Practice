@@ -3,11 +3,11 @@ Feature: Tests BBC
 
   Scenario Outline: Checks the name of the head line article
     Given User opens news page
-    Then User checks the '<titleHeadLine>' name of the article
+    Then User checks the <titleHeadLine> name of the article
 
     Examples:
-      | titleHeadLine                                    |
-      | Another Kabul airport attack likely, Biden warns |
+      | titleHeadLine                             |
+      | Taliban are ruthless, top US general says |
 
 
   Scenario: Checks the name of secondary article titles
@@ -26,10 +26,8 @@ Feature: Tests BBC
     Then User checks that the header of the first article contains searched keyword
 
 
-
   Scenario Outline: Verifies that user can submit story with empty name field
-    Given User opens page contains form
-    And User fills out the form field:
+    Given User fills out the form field:
       | story    | Healthy GRATE |
       | Contact  | 05362977888   |
       | Location | Ukraine       |
@@ -42,8 +40,7 @@ Feature: Tests BBC
 
 
   Scenario Outline: Verifies that user can submit story without choose checkbox
-    Given User opens page contains form
-    And User fills out the form field:
+    Given User fills out the form field:
       | story    | Healthy GRATE |
       | Name     | Olga          |
       | Contact  | 05362977888   |
@@ -56,8 +53,7 @@ Feature: Tests BBC
 
 
   Scenario Outline: Verifies that user can submit story with not valid email address
-    Given User opens page contains form
-    And User fills out the form field:
+    Given User fills out the form field:
       | story    | Healthy GRATE            |
       | Name     | Olga                     |
       | Email    | iamstudinginepamgmailcom |
