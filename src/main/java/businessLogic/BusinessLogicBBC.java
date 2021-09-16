@@ -68,9 +68,7 @@ public class BusinessLogicBBC {
 
     public void sendStoryToBBC(Map<String, String> map) {
         openNewsPage();
-        newsPage.goToCoronavirusPage();
-        coronavirusPage.goToYourCoronaStoriesPage();
-        yourCoronaStoriesPage.goToShareWithBBCPage();
+        openSendStoryPage();
         sendUsAStoryPage.fillFormFields(map);
         sendUsAStoryPage.getSubmitButton();
     }
